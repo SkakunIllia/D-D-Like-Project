@@ -17,7 +17,6 @@ def log():
     date_now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".log"
     log_path = os.path.join(log_dir, date_now)
     logging.basicConfig(level = logging.DEBUG, filename = log_path, filemode = "w", format = "%(asctime)s - %(levelname)s - %(message)s")
-    # logging.debug("Test")
 
 
 def print_player_classes():
