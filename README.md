@@ -1,9 +1,11 @@
-Version 0.2.
+Version 0.3.
 
 Author: Illia Skakun.
 
+Title: "D&D Light"
+
 This is university project.
-The idea of the project is a game that is called Dungeons&Dragons (DnD).
+The idea of the project is a game that is called Dungeons & Dragons (D&D).
 Actually, the concept of a game stayed the same, but with little changes.
 
 File structure:

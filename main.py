@@ -1,6 +1,10 @@
-import os, time, logging, Entities, re
+import os, logging, Entities, re
 from datetime import datetime
 from glob import glob
+from functools import wraps
+from time import sleep
+
+# Logger
 
 def log():
     path = "logs/*.log"
@@ -21,18 +25,39 @@ def log():
 
 logger = log()
 
+# Decorators:
+
+def dec_log(message):
+    def dec(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            logger.info(message)
+            return func(*args, **kwargs)
+        return wrapper
+    return dec
+
+@dec_log("def separator invocation")
+def separator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print("====================================")
+        return func(*args, **kwargs)
+    return wrapper
+
+# Functions:
+
+@separator
 def print_player_classes():
-    separator()
     print("Here are the classes that you can play in this game: ")
     print("1. Archer")
     print("2. Wizard")
     print("3. Gnome")
     print("4. Ogr")
     print("5. Knight")
-    time.sleep(delay_time)
+    sleep(delay_time)
 
+@separator
 def print_player_classes_description():
-    separator()
     print("Each class has its own speciality")
     print("1. Archer")
     print(f"\tYou posses a bow with which you can hit enemies from long distance. Health: {Entities.Archer.get_health(Entities.Archer(None))}. "
@@ -49,16 +74,18 @@ def print_player_classes_description():
     print("5. Knight")
     print(f"\tYou posses a silver sword  with which you can hit enemies from short distance. Health: {Entities.Knight.get_health(Entities.Knight(None))}. "
         f"Damage: {Entities.Knight.get_damage(Entities.Knight(None))}")
-    time.sleep(delay_time)
+    sleep(delay_time)
 
+@dec_log("def read_player_name invocation")
+@separator
 def read_player_name():
-    separator()
     while (player_name := input("What is your name? ")) == "":
         continue
     return player_name
 
+@dec_log("def read_player_class invocation")
+@separator
 def read_player_class():
-    separator()
     try:
         while not (player_class := int(input("What class do you want to play? (Enter a number) "))):
             continue
@@ -68,37 +95,38 @@ def read_player_class():
     except ValueError:
         return read_player_class()
 
+@dec_log("def greeting invocation")
 def greeting():
-    logger.info("def greeting invocation")
     print("Welcome to the game of D&D Light")
     print("The concept of the game is the same as in the D&D")
     print("The game consists of some random amount of quest that you have to complete")
     print("Then you enter the boss stage and that's all")
     print("Pretty simple, isn't it?")
     print("So let's try this game out!")
-    time.sleep(delay_time)
+    sleep(delay_time)
 
-def separator():
-    logger.info("def separator invocation")
-    print("====================================")
 
+
+@separator
 def next_thing():
-    separator()
+    @dec_log("def next_thing invocation")
     def internal():
-        logger.info("def next_thing invocation")
         if re.match("Yes|yes|aha|Sure|OK|yeah|Yeah|y|Y|yep|Yep", re.sub(" ", "", input("Are you ready to go futher?: "))):
             return True
         else:
             logger.info("def next_thing additional time to make decision")
             print("Alright, take your time, dear guest of mine")
-            time.sleep(2)
+            sleep(2)
             return internal()
     return internal()
 
+
+# Global variables:
 delay_time = 1
 
+
+@dec_log("def main invocation")
 def main():
-    logger.info("def main invocation")
     greeting()
     next_thing()
 
