@@ -50,9 +50,10 @@ class Player(Entity):
 class Archer(Player):
     def __init__(self, name):
         super().__init__(name, "Archer")
-        self.set_items([Item("Relict bow", "Bow", 65, 10)])
+        self.set_items([Item("Relict bow", 65, 10)])
         self.set_health(80)
         self._damage = 15
+        self._weapon = self._items[0]
     def __repr__(self):
         return f'Archer[Name: {self._name}, health: {self._health}, items: {self._items}, weapon: {self._weapon}]'
     def get_damage(self):
@@ -62,8 +63,9 @@ class Knight(Player):
     def __init__(self, name):
         super().__init__(name, "Knight")
         self.set_health(120)
-        self.set_items([Item("Silver sword", "Sword", 45, 13)])
+        self.set_items([Item("Silver sword", 45, 13)])
         self._damage = 20
+        self._weapon = self._items[0]
     def __repr__(self):
         return f'Knight[Name: {self._name}, health: {self._health}, items: {self._items}, weapon: {self._weapon}]'
     def get_damage(self):
@@ -73,8 +75,9 @@ class Ogr(Player):
     def __init__(self, name):
         super().__init__(name, "Ogr")
         self.set_health(150)
-        self.set_items([Item("Greeny mace", "Mace", 80, 7)])
+        self.set_items([Item("Greeny mace", 80, 7)])
         self._damage = 30
+        self._weapon = self._items[0]
     def __repr__(self):
         return f'Ogr[Name: {self._name}, health: {self._health}, items: {self._items}, weapon: {self._weapon}]'
     def get_damage(self):
@@ -84,8 +87,9 @@ class Gnome(Player):
     def __init__(self, name):
         super().__init__(name, "Gnome")
         self.set_health(100)
-        self.set_items([Item("Gold pickaxe", "Pickaxe", 50, 7)])
+        self.set_items([Item("Gold pickaxe", 50, 7)])
         self._damage = 20
+        self._weapon = self._items[0]
     def __repr__(self):
         return f'Gnome[Name: {self._name}, health: {self._health}, items: {self._items}, weapon: {self._weapon}]'
     def get_damage(self):
@@ -95,8 +99,9 @@ class Wizard(Player):
     def __init__(self, name):
         super().__init__(name, "Wizard")
         self.set_health(80)
-        self.set_items([Item("Magical wand", "Wand", 60, 15)])
+        self.set_items([Item("Magical wand", 60, 15)])
         self._damage = 10
+        self._weapon = self._items[0]
     def __repr__(self):
         return f'Gnome[Name: {self._name}, health: {self._health}, items: {self._items}, weapon: {self._weapon}]'
     def get_damage(self):
@@ -104,13 +109,12 @@ class Wizard(Player):
 
 #===================================================================================
 class Item(Entity):
-    def __init__(self, name, typeOfEntity = "Entity", damage = 0, durability = 0):
+    def __init__(self, name, damage = 0, durability = 0):
         super().__init__(name)
         self._durability = durability
         self._damage = damage
-        self._type = typeOfEntity
     def __repr__(self):
-        return f'Item[Name: {self._name}, type: {self._type}]'
+        return f'Item[Name: {self._name}]'
 
 #===================================================================================
 class Quest:
