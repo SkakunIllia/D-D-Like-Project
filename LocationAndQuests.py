@@ -1,5 +1,6 @@
 from Entities import random, Mob
 from random import randint
+from Logger import dlog
 #===================================================================================
 # Locations and Location-Quests
 class Location:
@@ -51,9 +52,11 @@ def gen_desc_quests():
         index += 1
         yield res
 
+@dlog
 def quest_complete(luck, predicate):
     return predicate(luck)
 
+@dlog
 def is_successful(option):
     if option == 1:
         return quest_complete(random(), lambda x: x > 0)

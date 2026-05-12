@@ -1,9 +1,0 @@
-2026-05-12 19:33:13,721 - DEBUG - Initializing logger
-2026-05-12 19:33:13,722 - DEBUG - def separator - invocation
-2026-05-12 19:33:13,722 - DEBUG - def separator - invocation
-2026-05-12 19:33:13,722 - DEBUG - def separator - invocation
-2026-05-12 19:33:13,722 - DEBUG - def separator - invocation
-2026-05-12 19:33:13,722 - DEBUG - def main - invocation
-2026-05-12 19:33:13,722 - DEBUG - def quest_get_option - invocation
-2026-05-12 19:33:13,722 - DEBUG - def quest_get_option - getting player's option to the quest
-2026-05-12 19:33:16,914 - DEBUG - def quest_complete - invocation
