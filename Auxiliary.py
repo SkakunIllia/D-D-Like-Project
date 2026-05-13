@@ -61,8 +61,8 @@ def random():
 def verify_answer(string):
     return match("Yes|yes|aha|Sure|OK|yeah|Yeah|y|Y|yep|Yep", sub(" ", "", string))
 
-@dlog
 @separator
+@dlog()
 def next_thing():
     @dlog("are we going forward?")
     def internal():
@@ -75,6 +75,3 @@ def next_thing():
             sleep(2)
             return internal()
     return internal()
-
-
-

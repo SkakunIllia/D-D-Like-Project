@@ -2,7 +2,7 @@ from Entities import *
 
 #===================================================================================
 # Generators
-def gen_desc_main_location():
+def gen_desc_main_locations():
     dsc = [("My dear friend, you have appeared to be brave enough to get here.\n"
             "Our journey starts from here, my lovely guest - from a cold campfire.\n"
             "You are going towards to new adventures and you have already discovered \n"
@@ -49,29 +49,11 @@ class Location:
 #===================================================================================
 # Global variables
 mob_names = ["Zombie", "Skeleton", "Ogr", "Giant"]
+quest_desc = gen_desc_quests()
+main_locations_desc = gen_desc_main_locations()
 
 #===================================================================================
 # Functions
-@dlog
-@separator
-def game():
-    pass
-
-@dlog
-@separator
-def end_of_game():
-    pass
-
-@dlog
-@separator
-def quest1(desc):
-    print(desc)
-
-@dlog
-@separator
-def quest2(desc):
-    pass
-
 @dlog("getting player's option to the quest")
 def quest_get_option():
     try:
@@ -85,11 +67,11 @@ def quest_get_option():
     except ValueError:
         return quest_get_option()
 
-@dlog
+@dlog()
 def quest_complete(luck, predicate):
     return predicate(luck)
 
-@dlog
+@dlog()
 def quest_is_successful(option):
     if option == 1:
         return quest_complete(random(), lambda x: x > 0)
@@ -97,3 +79,32 @@ def quest_is_successful(option):
         return quest_complete(random(), lambda x: x > 60)
     else:
         return quest_complete(random(), lambda x: x > 40)
+
+@separator
+@dlog()
+def quest1():
+    desc = next(quest_desc)
+    print(desc)
+    sleep(delay_time)
+
+@separator
+@dlog()
+def quest2():
+    pass
+
+@separator
+@dlog()
+def main_location1():
+    desc = next(main_locations_desc)
+    print(desc)
+    sleep(delay_time)
+
+@dlog()
+def game():
+    main_location1()
+    quest1()
+
+@separator
+@dlog()
+def end_of_game():
+    pass

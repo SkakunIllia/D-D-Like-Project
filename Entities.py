@@ -2,6 +2,7 @@ from Auxiliary import *
 
 #===================================================================================
 # Functions
+@dlog()
 def initialize_entity(player_class, player_name):
     match player_class:
         case 1: return Archer(player_name)
