@@ -1,4 +1,5 @@
 from Entities import *
+import DeathException
 
 #===================================================================================
 # Generators
@@ -84,8 +85,8 @@ def quest1(player):
         logger.info("def ques1.fight - the player has started the fight")
         mobs = [
             Mob(
-                mob_names[randint(0, len(mob_names))]
-                for _ in range(2)
+                mob_names[randint(0, len(mob_names) - 1)]
+                for _ in range(4)
             )
         ]
         for i, mob in enumerate(mobs):
@@ -94,13 +95,13 @@ def quest1(player):
             player.attack(mob)
             if player.get_health() < 0:
                 logger.info("def quest1 - player has died")
-                print("Unfortunately the mobs have killed you")
-                death()
+                print("Unfortunately you have been killed")
+                raise DeathException
         sleep(delay_time_quest)
         logger.info("def quest1 - player has won the fight")
         print("It was tough, but you have perfectly fought and won the battle of the Cave")
-        player.add(Item("Diamond"))
-        return end_of_quest()
+        player.add_item(Item("Diamond"))
+        end_of_quest()
 
     def end_of_quest():
         sleep(delay_time_quest)
@@ -139,7 +140,7 @@ def quest1(player):
             sleep(delay_time_quest)
             logger.info("def quest1 - the player has died in a fight")
             print("There were two giant zombies that, unfortunately, killed you...")
-            death()
+            raise DeathException
 
 @separator
 @dlog()
@@ -155,9 +156,13 @@ def main_location1():
 
 @dlog()
 def game(player):
-    main_location1()
-    quest1(player)
-    next_thing()
+    try:
+        main_location1()
+        quest1(player)
+        # next_thing()
+        end_of_game()
+    except DeathException:
+        death()
 
 @separator
 @dlog()
@@ -174,4 +179,5 @@ def end_of_game():
 @separator
 @dlog()
 def death():
-    print("You died")
+    print("Unfortunately you have been killed")
+    end_of_game()

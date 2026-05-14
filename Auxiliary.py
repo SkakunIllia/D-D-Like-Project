@@ -6,7 +6,7 @@ from random import randint
 
 # Global variables:
 delay_time = 1
-delay_time_quest = 1
+delay_time_quest = 0
 
 # Logo
 @dlog("printing the logo's separator")

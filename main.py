@@ -16,6 +16,5 @@ def main():
     next_thing()
 
     game(player)
-    end_of_game()
 
 main()
