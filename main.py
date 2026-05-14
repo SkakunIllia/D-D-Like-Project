@@ -12,9 +12,9 @@ def main():
     # next_thing()
     #
     player = class_choice()
-
+    #
     next_thing()
-
+    #
     game(player)
 
 main()
