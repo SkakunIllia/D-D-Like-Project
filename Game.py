@@ -42,7 +42,7 @@ main_locations_desc = gen_desc_main_locations()
 @dlog("getting player's option to the quest")
 def quest_get_option():
     try:
-        while not (option := int(input("Which option would you like to pick? (Enter an integer) "))):
+        while not (option := int(input("Which option would you like to pick? (Enter a number from a list above) "))):
             logger.debug(f"def quest_get_option - null option")
             continue
         if not (1 <= option <= 3):
@@ -108,16 +108,15 @@ def quest1(player):
         logger.info("def quest1 - the player is outside the cave")
         print("\nNow you are outside the cave and going further the road."
               "\nIt is dark outside so you decided to rest for a little bit")
-        print("You look at yourself in a river as in the mirror and wonder about this magical effect...")
+        sleep(delay_time_quest)
+        print("\nYou look at yourself in a river as in the mirror and wonder about this magical effect...")
         print(player)
         sleep(delay_time)
 
     if option == 1:
-        sleep(delay_time_quest)
         logger.info("def quest1 - the player leaves the quest")
         print("Well, sometimes it is better to omit possible problem.\nNevertheless you don't get the prize")
     elif option == 2:
-        sleep(delay_time_quest)
         logger.info("def quest1 - the player tries to sneak into the cave")
         if is_successful:
             sleep(delay_time_quest)
@@ -127,17 +126,14 @@ def quest1(player):
                 "there something really interesting")
             player.add(Item("Diamond"))
         else:
-            sleep(delay_time_quest)
             logger.info("def quest1 - the player has been noticed while sneaking into the cave")
             print("You have been noticed while sneaking into the cave.\nThe fight has started")
             fight()
     elif option == 3:
         if is_successful:
-            sleep(delay_time_quest)
             print("You have started really cruel fight with the monsters")
             fight()
         else:
-            sleep(delay_time_quest)
             logger.info("def quest1 - the player has died in a fight")
             print("There were two giant zombies that, unfortunately, killed you...")
             raise DeathException

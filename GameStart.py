@@ -7,11 +7,13 @@ def class_choice():
     player_class = read_player_class()
     logger.debug("def class_choice - initializing player")
     player = initialize_entity(player_class, player_name)
-    print("Here is your character -> ", end="")
-    print(player)
-    if verify_answer(input("Is that what you wanted? ")):
+    print()
+    sep()
+    print(f"Here is your character -> {player.__repr__()}\n", end="")
+    if verify_answer(input("Is that what you wanted? (Y/N) ")):
         logger.debug("def class_choice - going to the game itself")
-        print("Alright, then let's start our journey into the world of D&D Light!")
+        sep()
+        print("\nAlright, then let's start our journey into the world of D&D Light!")
         return player
     else:
         logger.debug("def class_choice - rechoosing the class or the name")
@@ -41,7 +43,7 @@ def print_player_classes():
 @separator
 @dlog("printing classes description")
 def print_player_classes_description():
-    print("Each class has its own speciality")
+    print("Each character has its own speciality")
     print("1. Archer")
     print(f"\tYou posses a bow with which you can hit enemies from long distance. Health: {Archer.get_health(Archer(None))}.")
     print("2. Wizard")
@@ -65,7 +67,7 @@ def read_player_name():
 @dlog("reading player's class")
 def read_player_class():
     try:
-        while not (player_class := int(input("What class do you want to play? (Enter a number) "))):
+        while not (player_class := int(input("What class do you want to play? (Enter a number from a list above) "))):
             logger.debug(f"def read_player_class - null class")
             continue
         if not ( 1 <= player_class <= 5):

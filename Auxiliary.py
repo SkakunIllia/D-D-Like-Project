@@ -5,8 +5,8 @@ from time import sleep
 from random import randint
 
 # Global variables:
-delay_time = 1
-delay_time_quest = 0
+delay_time = 5
+delay_time_quest = 3
 
 # Logo
 @dlog("printing the logo's separator")
@@ -49,9 +49,9 @@ def logo():
 #     """)
     print(r"""
  .          .                 .         .
-    ___  _  _  ___       _    _  ___  _   _  ___ 
-   |  _\| \| || _ \     | |  |_|/  _\| |_| ||_ _|  *
-   | |  |    || | |     | |__ | | (_ |  _  | | | 
+    ___  _  _  ___       _     _  ___  _   _  ___ 
+   |  _\| \| || _ \     | |   | |/  _\| |_| ||_ _|  *
+   | |  |    || | |     | |__ | | (_ ||  _  | | | 
    |___/|_|\_||___/     |____||_|\___||_| |_| |_|
       *          .              *                .
     """)
@@ -93,7 +93,7 @@ def language():
 def next_thing():
     @dlog("are we going forward?")
     def internal():
-        if verify_answer(input("Are you ready to go further?: ")):
+        if verify_answer(input("Are you ready to go further?: (Y/N) ")):
             logger.debug(f"def next_thing - we are going forward")
             return True
         else:

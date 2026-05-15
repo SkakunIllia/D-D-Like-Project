@@ -3,20 +3,17 @@ from GameStart import *
 
 @dlog()
 def main():
-    # language()
     # logo()
+    # language()
     # greeting()
-    # next_thing()
     # #
     # print_player_classes()
+    # next_thing()
     # print_player_classes_description()
-    # next_thing()
+    player = class_choice()
     #
-    # player = class_choice()
-    # #
-    # next_thing()
-    # #
-    # game(player)
-    pass
+    #
+    game(player)
+    # pass
 
 main()
