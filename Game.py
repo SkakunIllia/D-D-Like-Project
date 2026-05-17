@@ -18,7 +18,7 @@ def gen_desc_main_locations():
         yield res
 
 def gen_desc_quests():
-    dsc = [("\"It is dark here and I here somebody there, deep in the cave\", \n"
+    dsc = [("\"It is dark here and I hear somebody there, deep in the cave\", \n"
         "you say. You think of a few ways of coping with it:\n"
         "\t1. You can ignore the cave and go ahead the road near the cave.\n"
         "\t2. Nevertheless you are not aware of what is inside the cave, but \n"
@@ -179,8 +179,8 @@ def end_of_game():
  |_   _| |  | |  ____| |  ____| \ | |  __ \ 
    | | | |__| | |__    | |__  |  \| | |  | |
    | | |  __  |  __|   |  __| | . ` | |  | |
-  _| |_| |  | | |____  | |____| |\  | |__| |
- |_____|_|  |_|______| |______|_| \_|_____/
+   | | | |  | | |____  | |____| |\  | |__| |
+   |_| |_|  |_|______| |______|_| \_|_____/
  """)
 
 @separator
