@@ -22,7 +22,6 @@ def save(player):
 
     path_save = "saves/*.json"
     files = glob(path_save)
-    print(files)
     if "saves/" + save_title + ".json" in files:
         print("The file with this name already exists")
         res = verify_answer(input("Do you want to override the save file? "))
