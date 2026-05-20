@@ -37,9 +37,6 @@ def print_player_classes_description():
     print(f"\tYou posses a mace with which you can hit enemies from medium distance. Health: {Ogre.get_health(Ogre(None))}.")
     print("5. Knight")
     print(f"\tYou posses a silver sword  with which you can hit enemies from short distance. Health: {Knight.get_health(Knight(None))}.")
-
-
-
     sleep_delay(7)
 
 @separator
