@@ -38,10 +38,10 @@ def gen_desc_quests():
 def quest_get_option():
     try:
         while not (option := int(input("Which option would you like to pick? (Enter a number from a list above) "))):
-            logger.debug(f"def quest_get_option - null option")
+            logs(quest_get_option, 1, "null option")
             continue
         if not (1 <= option <= 3):
-            logger.debug(f"def quest_get_option - improper option")
+            logs(quest_get_option, 1, "improper option")
             raise ValueError("Wrong option. Usage: 1 <= player_class <= 3")
         return option
     except ValueError:
@@ -54,13 +54,13 @@ def quest_complete(luck, predicate):
 @dlog()
 def quest_is_successful(option):
     if option == 1:
-        logger.info("def quest_is_successful - option 1")
+        logs(quest_is_successful, 1, "option 1")
         return quest_complete(random(), lambda x: x > 0)
     elif option == 2:
-        logger.info("def quest_is_successful - option 2")
+        logs(quest_is_successful, 1, "option 2")
         return quest_complete(random(), lambda x: x > 50)
     else:
-        logger.info("def quest_is_successful - option 3")
+        logs(quest_is_successful, 1, "option 3")
         return quest_complete(random(), lambda x: x > 20)
 
 @dlog()
@@ -69,15 +69,15 @@ def quest1(player):
     print("QUEST 1")
     desc = next(quest_desc)
     print(desc)
-    sleep(delay_time - 1)
+    sleep_delay(delay_time - 1)
     option = quest_get_option()
     is_successful = quest_is_successful(option)
     sep()
-    logger.info(f"def quest1 - is option successful? {is_successful}")
+    logs(quest1, 1, f"is option successful? {is_successful}")
 
     def fight():
-        sleep(delay_time_quest)
-        logger.info("def ques1.fight - the player has started the fight")
+        sleep_delay(delay_time_quest)
+        logs(fight, 1, "the player has started the fight")
         mobs = [
             Mob(
                 mob_names[randint(0, len(mob_names) - 1)]
@@ -85,43 +85,43 @@ def quest1(player):
             )
         ]
         for i, mob in enumerate(mobs):
-            sleep(delay_time_quest)
-            logger.info(f"def quest1 - player attack the mob {i}")
+            sleep_delay(delay_time_quest)
+            logs(fight, 2, f"player attack the mob {i}")
             player.attack(mob)
             if player.get_health() < 0:
-                logger.info("def quest1 - player has died")
+                logs(fight, 2, "player has died")
                 print("Unfortunately you have been killed")
                 raise DeathException
-        sleep(delay_time_quest)
-        logger.info("def quest1 - player has won the fight")
+        sleep_delay(delay_time_quest)
+        logs(fight, 2, "player has won the fight")
         print("It was tough, but you have perfectly fought and won the battle of the Cave")
         player.add_item(Item("Diamond"))
         end_of_quest()
 
     def end_of_quest():
-        sleep(delay_time_quest)
-        logger.info("def quest1 - the player is outside the cave")
+        sleep_delay(delay_time_quest)
+        logs(end_of_quest, 2, "the player is outside the cave")
         print("\nNow you are outside the cave and going further the road."
               "\nIt is dark outside so you decided to rest for a little bit")
-        sleep(delay_time_quest)
+        sleep_delay(delay_time_quest)
         print("\nYou look at yourself in a river as in the mirror and wonder about this magical effect...")
         print(player)
-        sleep(delay_time)
+        sleep_delay(delay_time)
 
     if option == 1:
-        logger.info("def quest1 - the player leaves the quest")
+        logs(quest1, 2, "the player leaves the quest")
         print("Well, sometimes it is better to omit possible problem.\nNevertheless you don't get the prize")
     elif option == 2:
-        logger.info("def quest1 - the player tries to sneak into the cave")
+        logs(quest1, 2, "the player tries to sneak into the cave")
         if is_successful:
-            sleep(delay_time_quest)
-            logger.info("def quest1 - the player sneaked into the cave successfully")
+            sleep_delay(delay_time_quest)
+            logs(quest1, 2, "the player sneaked into the cave successfully")
             print(
                 "Heeeah! You got inside sneakily and found "
                 "there something really interesting")
             player.add(Item("Diamond"))
         else:
-            logger.info("def quest1 - the player has been noticed while sneaking into the cave")
+            logs(quest1, 2, "the player has been noticed while sneaking into the cave")
             print("You have been noticed while sneaking into the cave.\nThe fight has started")
             fight()
     elif option == 3:
@@ -129,7 +129,7 @@ def quest1(player):
             print("You have started really cruel fight with the monsters")
             fight()
         else:
-            logger.info("def quest1 - the player has died in a fight")
+            logs(quest1, 2, "the player has died in a fight")
             print("There were two giant zombies that, unfortunately, killed you...")
             raise DeathException
 
@@ -143,7 +143,7 @@ def quest2(player):
 def main_location1(player):
     desc = next(main_locations_desc)
     print(desc)
-    sleep(delay_time)
+    sleep_delay(delay_time)
 
 #===================================================================================
 # Global variables
@@ -154,7 +154,7 @@ load_ingame_progres = load(None)
 ingame_progress = load_ingame_progres if ((load_ingame_progres is not None) and (load_ingame_progres > 0)) else 0
 main_locations_desc = gen_desc_main_locations()
 
-bin_file_to_extraction = 1
+bin_file_to_extraction = 0
 
 #===================================================================================
 # Main game function

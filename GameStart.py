@@ -1,24 +1,6 @@
 from Entities import *
 from Auxiliary import *
 
-@dlog("choosing class")
-def class_choice():
-    player_name = read_player_name()
-    player_class = read_player_class()
-    logger.debug("def class_choice - initializing player")
-    player = initialize_entity(player_class, player_name)
-    print()
-    sep()
-    print(f"Here is your character -> {player.__repr__()}\n", end="")
-    if verify_answer(input("Is that what you wanted? (Y/N) ")):
-        logger.debug("def class_choice - going to the game itself")
-        sep()
-        print("\nAlright, then let's start our journey into the world of D&D Light!")
-        return player
-    else:
-        logger.debug("def class_choice - rechoosing the class or the name")
-        return class_choice()
-
 @dlog("greeting the player")
 def greeting():
     print("Welcome to the game of D&D Light")
@@ -27,7 +9,7 @@ def greeting():
     print("Then you enter the boss stage and that's all")
     print("Pretty simple, isn't it?")
     print("So let's try this game out!")
-    sleep(delay_time)
+    sleep_delay(delay_time)
 
 @separator
 @dlog("printing classes")
@@ -38,7 +20,7 @@ def print_player_classes():
     print("3. Gnome")
     print("4. Ogre")
     print("5. Knight")
-    sleep(delay_time - 5 if delay_time - 5 > 0 else delay_time)
+    sleep_delay(5)
 
 @separator
 @dlog("printing classes description")
@@ -54,13 +36,13 @@ def print_player_classes_description():
     print(f"\tYou posses a mace with which you can hit enemies from medium distance. Health: {Ogre.get_health(Ogre(None))}.")
     print("5. Knight")
     print(f"\tYou posses a silver sword  with which you can hit enemies from short distance. Health: {Knight.get_health(Knight(None))}.")
-    sleep(delay_time - 7 if delay_time - 7 > 0 else delay_time)
+    sleep_delay(7)
 
 @separator
 @dlog("reading player's name")
 def read_player_name():
     while (player_name := input("What is your name? ")) == "":
-        logger.debug(f"def read_player_name - null name")
+        logs(read_player_name, 1, "null name")
         continue
     return player_name
 
@@ -68,12 +50,29 @@ def read_player_name():
 def read_player_class():
     try:
         while not (player_class := int(input("What class do you want to play? (Enter a number from a list above) "))):
-            logger.debug(f"def read_player_class - null class")
+            logs(read_player_class, 1, "null class")
             continue
         if not ( 1 <= player_class <= 5):
-            logger.debug(f"def read_player_class - improper class")
+            logs(read_player_class, 1, "improper class")
             raise ValueError("Wrong player_class. Usage: 1 <= player_class <= 5")
         return player_class
     except ValueError:
         return read_player_class()
 
+@dlog("choosing class")
+def class_choice():
+    player_name = read_player_name()
+    player_class = read_player_class()
+    logs(class_choice, 1, "initializing player")
+    player = initialize_entity(player_class, player_name)
+    print()
+    sep()
+    print(f"Here is your character -> {player.__repr__()}\n", end="")
+    if verify_answer(input("Is that what you wanted? (Y/N) ")):
+        logs(class_choice, 1, "going to the game itself")
+        sep()
+        print("\nAlright, then let's start our journey into the world of D&D Light!")
+        return player
+    else:
+        logs(class_choice, 1, "rechoosing the class or the name")
+        return class_choice()

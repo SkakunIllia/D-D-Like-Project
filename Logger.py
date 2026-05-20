@@ -41,3 +41,10 @@ def dlog(message = ""):
                 logger.exception(f"At {name} occurred some unexpected error")
         return wrapper
     return dec
+
+def logs(fun, message_level : int = 1, message : str = None) -> None:
+    match message_level:
+        case 1: logger.debug(f'def {fun.__name__} - {message}')
+        case 2: logger.info(f'def {fun.__name__} - {message}')
+        case 3: logger.error(f'def {fun.__name__} - {message}')
+        case 4: logger.critical(f'def {fun.__name__} - {message}')
